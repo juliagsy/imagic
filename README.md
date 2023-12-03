@@ -1,1 +1,1 @@
-# i2m
+# Imagic
