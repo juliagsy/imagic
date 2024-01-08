@@ -35,7 +35,7 @@ display(Audio(gen_wav[0].cpu().numpy(), rate=sampling_rate))
 
 Example image:
 
-![example image 1](examples/img_5.png)
+<img width="40%" src="examples/img_5.png">
 
 [Output wav](examples/wav_5.wav)
 
