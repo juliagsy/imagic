@@ -7,7 +7,7 @@ import json
 
 class ImMuTe(Dataset):
 
-    def __init__(self, images_path, captions_json_file, audios_path, start=0, end=2999, sampling_rate=16000, pixel=64):
+    def __init__(self, images_path, captions_json_file, audios_path, start=0, end=2999, sampling_rate=16000, pixel=64, normalize=False):
         super().__init__()
         self.images_path = images_path
         self.captions_json_file = captions_json_file
@@ -15,15 +15,14 @@ class ImMuTe(Dataset):
         self.sampling_rate = sampling_rate
 
         # define transform to convert image to tensors
-        self.transform = transforms.Compose([
+        transform = [
             transforms.Resize(pixel),
-            # transforms.CenterCrop(224),
             transforms.ToTensor(),
-            # transforms.Normalize(
-            #     mean=[0.485, 0.456, 0.406],
-            #     std=[0.229, 0.224, 0.225]
-            # ),
-        ])
+        ]
+        if normalize:
+          transform.append(transforms.Normalize([0.5], [0.5]))
+
+        self.transform = transforms.Compose(transform)
 
         # load captions
         with open(self.captions_json_file, "r", encoding='utf-8') as f:
@@ -41,7 +40,6 @@ class ImMuTe(Dataset):
               # load audio
               wav, sr = torchaudio.load(f"{self.audios_path}/aud_{i}.wav")
               wav = torchaudio.functional.resample(wav, orig_freq=sr, new_freq=self.sampling_rate)
-              # wav = torch.mean(wav, dim=0)
               wav = torch.mean(wav, dim=0, keepdim=True)
               if wav.size(-1) < self.sampling_rate * 10:
                   pad_len = self.sampling_rate * 10 - wav.size(-1)
