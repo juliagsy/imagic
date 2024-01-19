@@ -8,6 +8,8 @@ A transformer-based solution is approached in the architecture design of Imagic,
 
 ## Usage
 
+**Note:** Please download the `imagic_state_dict.bin` file from the Hugging Face repository.
+
 ```python
 from transformers import AutoImageProcessor, AutoModel
 
