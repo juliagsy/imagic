@@ -1,7 +1,7 @@
 import numpy as np
 import torch
 import torch.nn as nn
-from transformers import AutoProcessor, MusicgenForConditionalGeneration, AutoImageProcessor, ViTModel
+from transformers import MusicgenForConditionalGeneration, AutoModel
 
 
 class Im2Mu(nn.Module):
@@ -9,7 +9,7 @@ class Im2Mu(nn.Module):
     super(Im2Mu, self).__init__()
 
     self.musicgen = MusicgenForConditionalGeneration.from_pretrained("facebook/musicgen-small")
-    self.muvis = MuVisModel.from_pretrained("juliagsy/muvis").model.vit
+    self.muvis = AutoModel.from_pretrained("juliagsy/muvis", trust_remote_code=True).model.vit
 
     self.loss_ce = nn.CrossEntropyLoss(label_smoothing=0.1, ignore_index=-100)
     self.img_lin = nn.Linear(197, 256)
