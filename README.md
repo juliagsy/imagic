@@ -40,6 +40,8 @@ display(Audio(gen_wav[0].cpu().numpy(), rate=sampling_rate))
 
 ### Example
 
+As music cannot be displayed here, its example input image will be shown whereas the location of the generated music wihtin this repository will be attached.
+
 Example image:
 
 <img width="40%" src="examples/img_5.png">
