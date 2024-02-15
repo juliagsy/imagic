@@ -8,7 +8,7 @@ A transformer-based solution is approached in the architecture design of Imagic,
 
 ## Usage
 
-**Note:** Please download the `imagic_state_dict.bin` file from the Hugging Face repository: [juliagsy/imagic](https://huggingface.co/juliagsy/imagic).
+**Note:** Generation performance may differ/degrade due to issues with saving shared tensors on Hugging Face.
 
 ```python
 from transformers import AutoImageProcessor, AutoModel
@@ -16,7 +16,6 @@ from transformers import AutoImageProcessor, AutoModel
 vit_proc = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224-in21k", low_cpu_mem_usage=True)
 
 i2m = AutoModel.from_pretrained("juliagsy/imagic", trust_remote_code=True)
-i2m.model.load_state_dict(torch.load("imagic_state_dict.bin"))
 ```
 
 ## Image-conditioned Music Generation
