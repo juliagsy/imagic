@@ -46,4 +46,3 @@ Example image:
 <img width="40%" src="examples/img_5.png">
 
 [Output wav](examples/wav_5.wav)
-
